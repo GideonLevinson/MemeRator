@@ -1,0 +1,7 @@
+.canvas {
+    display: block;
+    margin: auto;
+    background-color: var(--clr0);
+    border: 4px solid black;
+    border-radius: 1em;
+}

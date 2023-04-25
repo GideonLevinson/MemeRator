@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Memerator</title>
+</head>
+
+<body class="main-layout" onload="init()">
+    <header class="main-header full flex space-between align-center">
+        <h1>memerator</h1>
+        <div class="main-nav">
+            <ul class="main-menu flex align center clean-list">
+                <li><a href="#">memes</a></li>
+                <li><a href="#">gallery</a></li>
+                <li><a href="#">about</a></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <div class="meme-view">
+            <div class="meme-container">
+                <canvas class="canvas" height="500" width="500"></canvas>
+                <div class="tool-palette flex direction-column align-center">
+                    <h2>Tool palette</h2>
+                    <div class="textbox-tools">
+                        <input type="text">
+                        <button>up</button>
+                        <button>down</button>
+                        <button>switch</button>
+                        <button>add</button>
+                        <button>delete</button>
+                    </div>
+                    <div class="text-edit-tools">
+                        <button>A+</button>
+                        <button>A-</button>
+                        <button>L</button>
+                        <button>C</button>
+                        <button>R</button>
+                        <button>Font</button>
+                        <button>dec</button>
+                        <button>clr</button>
+                    </div>
+                    <div class="emoji-gallery">
+                        <button>L</button>
+                        <Span>emoji's</Span>
+                        <button>R</button>
+                    </div>
+                    <div class="actions">
+                        <button>Download</button>
+                        <button>Share</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-view"></div>
+        <div id="gallery" class="gallery-container">
+            <header class="gallery-header full flex space-between align-center">
+                <input type="search">
+                <div>
+                    <ul class="clean-list ">
+                        <li>funny</li>
+                        <li>comics</li>
+                        <li>dogs</li>
+                        <li>drinks</li>
+                        <li>books</li>
+                    </ul>
+                </div>
+            </header>
+
+        </div>
+    </main>
+    <div class="modal-about">
+        <h2>About</h2>
+        <p>Create and share hilarious memes with Memerator - 
+            the ultimate meme-making app! With our easy-to-use 
+            interface and vast collection of templates, 
+            you'll have everything you need to turn any idea into a viral sensation. 
+            Customize your memes with fonts, colors, filters, and effects, 
+            then share them with the world using our social sharing features. 
+            Download Memerator today and start making memes that will have everyone laughing!
+        </p>
+    </div>
+    <footer class="main-footer full">
+        <h1>memerator</h1>
+        <h4>all rights reserved 2023</h4>
+    </footer>
+
+   
+    <script src="js/main.js"></script>
+</body>
+
+</html>
