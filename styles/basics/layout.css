@@ -13,7 +13,7 @@
 
 /* need to toggle to not be showen */
 .meme-view {
-    display: block;
+    /* display: none; */
 
 }
 .meme-container {
@@ -24,13 +24,25 @@
 
 /* must be toggled to be seen! */
 .gallery-view {
-    display: none; 
+    /* display: block;  */
 }
 
 .gallery-container {
-    display: none; 
-    color: brown;
+    grid-column: 1 / -1;
 }
+
+.img-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 20vw); 
+    grid-auto-rows: 20vw;
+    gap: 0.25em;
+    padding: 0.25em;
+}
+.img-container img {
+    max-width: 100%;
+  height: auto;
+}
+
 
 /* must be toggled to be seen! */
 .modal-about {

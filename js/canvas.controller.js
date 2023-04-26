@@ -1,18 +1,11 @@
 'use strict'
-// let gCurrShape = {}
 
 let gElCanvas
 let gCtx
 let gStartPos
 let gIsMouseDown = false
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
-
-function init() {
-    gElCanvas = document.querySelector('.canvas')
-    gCtx = gElCanvas.getContext('2d')
-    addListeners()
-}
-
+       
 // Handle the listeners
 function addListeners() {
     addMouseListeners()

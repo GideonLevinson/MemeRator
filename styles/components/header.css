@@ -43,6 +43,10 @@ header .main-nav {
     position: relative;
 }
 
+.main-nav li a.active{
+    color: var(--clr3);
+}
+
 .main-nav .main-menu li:last-child{
     flex: 1 1 auto;
     box-shadow: 1px 0 0  #1d1d1d,-1px 0 0  #1d1d1d;
@@ -68,4 +72,27 @@ header ul > li a.active {
 
 header ul > li a:hover {
 	box-shadow: inset 0px -6px 0 var(--clr3);
+}
+
+.gallery-header {
+    display: grid;
+    grid-template-columns: 
+    minmax(auto,450px)
+    30px
+    minmax(auto,450px)
+    ;
+    color: var(--clr3);
+    background-color: bisque;
+    padding: 0 20px;
+    height: 3em;
+    align-items: center;
+    position: relative;
+}
+
+.gallery-header .search-keywords {
+    grid-column: 3;
+}
+
+.gallery-header input {
+    width: 15em;
 }
