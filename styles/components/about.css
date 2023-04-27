@@ -1,0 +1,15 @@
+.about-page {
+    color: var(--clr3);
+    text-align: center;
+    margin: 1em auto auto;
+    max-width: 600px;
+}
+
+.about-page h2 {
+    margin-bottom: 0.4em;
+}
+
+.about-page img {
+    width: 70%;
+    margin-bottom: 1em;
+}

@@ -1,12 +1,12 @@
 'use strict'
-
-var gCurrImgIdx
-var gCurrLineIdx = 0
 var gFillterBy = null
 
 var gImgs = [
     {id: 1, url: 'images/1.jpg', keywords: ['funny', 'cat']},
     {id: 2, url: 'images/2.jpg', keywords: ['funny', 'dog']},
+    {id: 3, url: 'images/3.jpg', keywords: ['baby', 'dog']},
+    {id: 4, url: 'images/4.jpg', keywords: ['mad', 'angry']},
+    {id: 5, url: 'images/5.jpg', keywords: ['funny', 'baby']},
 ] 
 
 var gKeywordSearchCountMap = {
@@ -22,10 +22,12 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I wish I was that cat rigth now...',
-            size: 20,
-            align: 'left',
-            color: 'red'
+            txt: 'I wish I was that cat right now...',
+            size: 28,
+            align: 'center',
+            fill: 'white',
+            stroke: 'black',
+            font: 'Impact'
         }
     ]
 }
@@ -43,8 +45,34 @@ function getImgURL(meme) {
 
 function setLineTxt(txt) {
     const currTxt = getLine()
+    console.log('currTxt:', currTxt)
     currTxt.txt = txt
     console.log('currTxt:', currTxt)
+}
+
+function addLine() {
+    const newLineIdx = gMeme.lines.length + 1
+    const newLine = _createNewLine(newLineIdx)
+    gMeme.lines.push(newLine)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
+function delLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    if (!gMeme.selectedLineIdx) return
+    else gMeme.selectedLineIdx--
+}
+
+function setLineColor(color) {
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    if (!line) return
+    line.fill = color
+}
+
+function moveSelectedLine() {
+    if (gMeme.selectedLineIdx === gMeme.lines.length - 1)
+        gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
 }
 
 function enlargeTxt() {
@@ -56,27 +84,84 @@ function enlargeTxt() {
     else return
 }
 
+function shrinkTxt() {
+    const currTxt =  getLine()
+    if (currTxt.size >= 16) {
+        currTxt.size -= 2
+        renderMeme()
+    }
+    else return
+}
+
+function SetAlignTxt(aligntxt) {
+    const currTxt =  getLine()
+   currTxt.align = aligntxt
+   renderMeme()
+}
+
+function setFont(font) {
+    const currTxt =  getLine()
+    currTxt.font = font
+    console.log('currTxt:', currTxt)
+}
+
 function getLine() {
-    return gMeme.lines[gCurrLineIdx]
+    return gMeme.lines[gMeme.selectedLineIdx]
 }
 
-function drawText(text, x = 200, y = 100) {
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'red'
-    gCtx.font = '32px Impact'
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
+function updateLineInputTxt() {
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
 
-    wrapText(gCtx, text)
-    // gCtx.fillText(text, 250, 30, [, 440]) // Draws (fills) a given text at the given (x, y) position.
-    // gCtx.strokeText(text, 250, 30, [, 440]) // Draws (strokes) a given text at the given (x, y) position.
+    if (!currLine) return
+    const elInput = document.querySelector('.text-input')
+    elInput.value = `${currLine.txt}`
 }
+
+function drawText() {
+    const lines = getAllLines()
+    if (!lines) return
+    lines.forEach((line) => {
+        gCtx.fillStyle = line.fill
+        gCtx.strokeStyle = line.stroke
+        gCtx.font = `${line.size}px ${line.font}`
+        gCtx.textAlign = `${line.align}`
+        gCtx.textBaseline = 'middle'
+        wrapText(gCtx, line.txt,line.posX, line.posY)
+        // gCtx.strokeText(line.txt, line.posX, line.posY)
+        // gCtx.fillText(line.txt, line.posX, line.posY)
+    })
+}
+
+function getAllLines() {
+    return gMeme.lines
+}
+
 
 function _updateLineIdx(idx) {
     gCurrLineIdx = idx
     gMeme.selectedLineIdx = gCurrLineIdx
 }
+
+function _createNewLine(numNewLine) {
+    const newPos = { x: gElCanvas.width / 2, y: gElCanvas.height / 2 }
+    if (numNewLine === 1) newPos.y = 40
+
+    else if (numNewLine === 2) {
+        newPos.y = gElCanvas.height - 70
+        console.log('newPos:', newPos)
+    }
+    return {
+        font: 'impact',
+        txt: 'm',
+        size: 28,
+        align: 'left',
+        fill: 'white',
+        posX: newPos.x,
+        posY: newPos.y,
+        stroke: 'black',
+    }
+}
+
 
 function getImgs() {
     if (!gFillterBy) return gImgs
@@ -87,38 +172,47 @@ function findImgByIdx(id) {
     return gImgs.find((img) => img.id === id)
 }
 
-function setImg() {
-    console.log('hello setImg')
+function setImg(imgIdx) {
+  gMeme.selectedImgId = +imgIdx
 }
 
-function setSelectedImgId(img) {
-    gMeme.selectedImgId = img.id
-}
-
-function wrapText(ctx, text, x = 250, y = 30, maxWidth = gElCanvas.width - 60, lineHeight = 36, textAlign = "left") {
-    var words = text.split(" ");
-    var line = "";
-    var textX = x;
-    if (textAlign === "center") {
-      var metrics = ctx.measureText(text);
-      textX = x + (maxWidth - metrics.width) / 2;
+function wrapText(gCtx, text, x = 250, y = 30, maxWidth = gElCanvas.width - 60, lineHeight = 42) {
+    var words = text.split(" ")
+    var line = ""
+    var textX = x
+    console.log('textX:', textX)
+    if (gCtx.textAlign === "right") {
+        console.log('gCtx.measureText(text):', gCtx.measureText(text))
+      var metrics = gCtx.measureText(text)
+      textX = x + (maxWidth) / 2  
     }
-    else if (textAlign === "right") {
-      var metrics = ctx.measureText(text);
-      textX = x + maxWidth - metrics.width;
+    else if (gCtx.textAlign === "left") {
+      var metrics = gCtx.measureText(text)
+      textX = x - (maxWidth) / 2
     }
     for (var i = 0; i < words.length; i++) {
-      var testLine = line + words[i] + " ";
-      var metrics = ctx.measureText(testLine);
-      var testWidth = metrics.width;
+      var testLine = line + words[i] + " "
+      var metrics = gCtx.measureText(testLine)
+      var testWidth = metrics.width
       if (testWidth > maxWidth && i > 0) {
-        ctx.fillText(line, textX, y);
-        line = words[i] + " ";
-        y += lineHeight;
+        gCtx.fillText(line, textX, y)
+        gCtx.strokeText(line, textX, y)
+        line = words[i] + " "
+        y += lineHeight
       }
       else {
-        line = testLine;
+        line = testLine
       }
     }
-    ctx.fillText(line, textX, y);
+    gCtx.fillText(line, textX, y)
+    gCtx.strokeText(line, textX, y)
   }
+
+  function downloadCanvas(elLink) {
+    console.log('Hi')
+    // Gets the canvas content and convert it to base64 data URL that can be save as an image
+    const data = gElCanvas.toDataURL() // Method returns a data URL containing a representation of the image in the format specified by the type parameter.
+    // console.log('data', data) // Decoded the image to base64
+    elLink.href = data // Put it on the link
+    elLink.download = 'my-meme' // Can change the name of the file
+}

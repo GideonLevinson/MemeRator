@@ -11,42 +11,36 @@
     grid-column: 2;
 }
 
-/* need to toggle to not be showen */
-.meme-view {
-    /* display: none; */
-
-}
 .meme-container {
     display: grid;
     grid-template-columns: 1fr 2em 1fr;
     margin-top: 1.5em;
 }
 
-/* must be toggled to be seen! */
-.gallery-view {
-    /* display: block;  */
-}
-
 .gallery-container {
     grid-column: 1 / -1;
 }
 
-.img-container {
+.imgs-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 20vw); 
     grid-auto-rows: 20vw;
     gap: 0.25em;
     padding: 0.25em;
 }
-.img-container img {
+.imgs-container img {
     max-width: 100%;
   height: auto;
+}
+
+.tool-palette > *{
+    margin: 2em;
 }
 
 
 /* must be toggled to be seen! */
 .modal-about {
-    display: none;
+    /* display: none; */
     position: fixed;
     font-family: montserrat, Haettenschweiler, serif;
     font-size: 16px;

@@ -14,50 +14,57 @@
         <h1>memerator</h1>
         <div class="main-nav">
             <ul class="main-menu flex align center clean-list">
-                <li><a href="#" onclick="onNavClick(this, 'memes')" class="active">memes</a></li>
-                <li><a href="#" onclick="onNavClick(this, 'gallery')">gallery</a></li>
-                <li><a href="#" onclick="onNavClick(this, 'about')">about</a></li>
+                <li><a href="#" class="memes" onclick="onNavClick('memes')">memes</a></li>
+                <li><a href="#" class="gallery active" onclick="onNavClick('gallery')">gallery</a></li>
+                <li><a href="#" class="about" onclick="onNavClick('about')">about</a></li>
             </ul>
         </div>
     </header>
 
-    <section id="memes" class="meme-view">
+    <section id="memes" class="meme-view" hidden>
         <div class="meme-container">
             <canvas class="canvas" height="500" width="500"></canvas>
             <div class="tool-palette flex direction-column align-center">
-                <h2>Tool palette</h2>
+                <!-- <h2>Tool palette</h2> -->
                 <div class="textbox-tools">
-                    <input type="text" onkeyup="onTxtInput(this.value)">
-                    <button>up</button>
-                    <button>down</button>
-                    <button>switch</button>
-                    <button>add</button>
-                    <button>delete</button>
+                    <input type="text" class="text-input" onkeyup="onTxtInput(this.value)">
+                    <!-- <button>up</button>
+                    <button>down</button> -->
+                    <button onclick="onLineSwitch()">switch</button>
+                    <button onclick="onAddLine()">add</button>
+                    <button onclick="onDelLine()">delete</button>
                 </div>
+
                 <div class="text-edit-tools">
-                    <button class="larger-txt" onclick="enlargeTxt()">A+</button>
-                    <button>A-</button>
-                    <button>L</button>
-                    <button>C</button>
-                    <button>R</button>
-                    <button>Font</button>
-                    <button>dec</button>
-                    <button>clr</button>
-                </div>
-                <div class="emoji-gallery">
+                    <button class="larger-txt" onclick="onTxtFormat(`A+`)">A+</button>
+                    <button onclick="onTxtFormat(`A-`)">A-</button>
+                    <button onclick="onTxtFormat(`left`)">L</button>
+                    <button onclick="onTxtFormat(`center`)">C</button>
+                    <button onclick="onTxtFormat(`right`)">R</button>
+                    <select name="fonts" class="select-fonts" onchange="onChangeFont(this.value)">
+                        <option value="impact">Impact</option>
+                        <option value="lobster">Lobster</option>
+                        <option value="Montserrat">Montserrat</option>
+                    </select>
+                    <!-- <input onchange="onStrokeClr()" type="color"> -->
+                    <input onchange="onFillClr(this.value)" type="color" value="#FFFFFF">
+                </div>   
+
+                <!-- <div class="emoji-gallery">
                     <button>L</button>
                     <Span>emoji's</Span>
                     <button>R</button>
-                </div>
+                </div> -->
                 <div class="actions">
-                    <button>Download</button>
+                    <button class="btn-save"><a href="#" onclick="onDownload(this)"
+                            download="file-name">Download</a></button>
                     <button>Share</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="gallery" class="gallery-view full hidden">
+    <section id="gallery" class="gallery-view full">
         <div id="gallery" class="gallery-container">
             <header class="gallery-header">
                 <input type="search" name="search" placeholder="Enter search keyword">
@@ -71,32 +78,31 @@
                     </ul>
                 </div>
             </header>
-            <div class="img-container">
-                <img src="images/1.jpg" alt="">
-                <img src="images/2.jpg" alt="">
+            <div class="imgs-container">
             </div>
         </div>
-
-
     </section>
 
-    <div class="modal-about">
-        <h2>About</h2>
-        <p>Create and share hilarious memes with Memerator -
-            the ultimate meme-making app! With our easy-to-use
-            interface and vast collection of templates,
-            you'll have everything you need to turn any idea into a viral sensation.
-            Customize your memes with fonts, colors, filters, and effects,
-            then share them with the world using our social sharing features.
-            Download Memerator today and start making memes that will have everyone laughing!
-        </p>
-    </div>
+    <section id="about" hidden>
+        <div class="about-page">
+            <h2>About</h2>
+            <p>Create and share hilarious memes with Memerator -
+                the ultimate meme-making app! With our easy-to-use
+                interface and vast collection of templates,
+                you'll have everything you need to turn any idea into a viral sensation.
+                Customize your memes with fonts, colors, filters, and effects,
+                then share them with the world using our social sharing features.
+                Download Memerator today and start making memes that will have everyone laughing!
+            </p>
+            <img src="images/my-meme.png" alt="">
+        </div>
+    </section>
     <footer class="main-footer full">
         <h1>memerator</h1>
         <h4>all rights reserved 2023</h4>
     </footer>
 
-
+    <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>

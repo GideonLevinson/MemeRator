@@ -5,6 +5,7 @@ function init() {
     gCtx = gElCanvas.getContext('2d')
     addListeners()
     renderMeme()
+    renderImgs()
 }
 
 function onTxtInput(txt) {
@@ -15,24 +16,44 @@ function onTxtInput(txt) {
 function renderMeme() {
     let meme = getMeme()
     let image = getImgURL(meme)
-    renderImg(image)
-}
-
-function renderImg(image) {
-    // Draw image from gImgs on the canvas
     let img = new Image()
     img.src = image
     if (!image) return
     img.onload = function () {
         // resizeCanvas
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        let text = getLine()
-        drawText(text.txt)
+        drawText()
+        gCtx.save()
     }
 }
 
+
 function onChangeLineTxt(txt) {
     setLineTxt(txt)
+    renderMeme()
+}
+
+function onAddLine() {
+    addLine()
+    updateLineInputTxt()
+    renderMeme()
+}
+
+function onDelLine() {
+    delLine()
+    updateLineInputTxt()
+    renderMeme()
+}
+
+function onFillClr(color) {
+    setLineColor(color)
+    updateLineInputTxt()
+    renderMeme()
+}
+
+function onLineSwitch() {
+    moveSelectedLine()
+    updateLineInputTxt()
     renderMeme()
 }
 
@@ -42,27 +63,48 @@ function resizeCanvas() {
     gElCanvas.height = elContainer.offsetHeight
 }
 
-function onNavClick(navItem, sectionId) {
-    let navItems = document.querySelectorAll(".main-menu a")
-    navItems.forEach(function(item) {
-      item.classList.remove("active")
-    });
+function onNavClick(sectionId) {
+    switchViews(sectionId)
+}
 
-    navItem.classList.add("active")
+function onTxtFormat(ev) {
+    console.log('ev:', ev)
+    switch (ev) {
+        case 'A+':
+            enlargeTxt()
+            break
+        case 'A-':
+            shrinkTxt()
+            break
+        case 'left':
+        case 'center':
+        case 'right':
+            SetAlignTxt(ev)
+            break
+        case 'Font':
 
-    switch (sectionId) {
-        case 'memes':
-          document.getElementById('memes').hidden = false
-          document.getElementById('gallery').hidden = true
-          //   document.getElementById('dogs').classList.remove("hidden")
-          break
-          case 'gallery':
-              document.getElementById('memes').hidden = true
-              document.getElementById('gallery').clahidden = false
-          break
-        // case 'about':
-        //   document.getElementById('about').classList.remove("hidden")
-        //   break
-      }
-    
-  }
+            break
+        case 'stroke':
+            setStroke()
+            break
+        case 'fill':
+
+            break
+        case 'emojiL':
+
+            break
+        case 'emojiR':
+
+            break
+    }
+}
+
+function onChangeFont(ev) {
+    console.log('font:', ev)
+    setFont(ev)
+    renderMeme()
+}
+
+function onDownload(elLink) {
+    downloadCanvas(elLink)
+}
