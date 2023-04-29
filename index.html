@@ -18,6 +18,7 @@
                 <li><a href="#" class="gallery active" onclick="onNavClick('gallery')">gallery</a></li>
                 <li><a href="#" class="about" onclick="onNavClick('about')">about</a></li>
             </ul>
+            <button class="menu-button" onclick="onToggleMenu()">☰</button>
         </div>
     </header>
 
@@ -26,15 +27,12 @@
             <div class="canvas-container">
                 <canvas class="canvas"></canvas>
             </div>
-            <div class="tool-palette flex direction-column align-center">
-                <!-- <h2>Tool palette</h2> -->
+            <div class="tool-palette">
                 <div class="textbox-tools">
                     <input type="text" class="text-input" onkeyup="onTxtInput(this.value)">
-                    <!-- <button>up</button>
-                    <button>down</button> -->
-                    <button onclick="onLineSwitch()"><img src="icons/arrows-up-down-solid.svg" alt=""></button>
-                    <button onclick="onAddLine()"><img src="icons/plus-solid.svg" alt=""></button>
-                    <button onclick="onDelLine()"><img src="icons/trash-can-regular.svg" alt=""></button>
+                    <button class="switch" onclick="onLineSwitch()"><img src="icons/arrows-up-down-solid.svg" alt=""></button>
+                    <button class="add" onclick="onAddLine()"><img src="icons/plus-solid.svg" alt=""></button>
+                    <button class="delete" onclick="onDelLine()"><img src="icons/trash-can-regular.svg" alt=""></button>
                 </div>
 
                 <div class="text-edit-tools">
@@ -43,22 +41,16 @@
                         <option value="lobster">Lobster</option>
                         <option value="Montserrat">Montserrat</option>
                     </select>
-                    <button class="larger-txt" onclick="onTxtFormat(`A+`)"><img src="icons/increase font - icon.png" alt=""></button>
-                    <button onclick="onTxtFormat(`A-`)"><img src="icons/decrease font - icon.png" alt=""></button>
-                    <button onclick="onTxtFormat(`left`)"><img src="icons/align-left-solid.svg" alt=""></button>
-                    <button onclick="onTxtFormat(`center`)"><img src="icons/align-center-solid.svg" alt=""></button>
-                    <button onclick="onTxtFormat(`right`)"><img src="icons/align-right-solid.svg" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`A+`)"><img src="icons/increase font - icon.png" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`A-`)"><img src="icons/decrease font - icon.png" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`left`)"><img src="icons/align-left-solid.svg" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`center`)"><img src="icons/align-center-solid.svg" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`right`)"><img src="icons/align-right-solid.svg" alt=""></button>
                     <button class="color-select">
                         <input onchange="onFillClr(this.value)" type="color" value="#FFFFFF">
                         <img src="icons/palette-solid.svg" alt="">
                     </button>
                 </div>   
-
-                <!-- <div class="emoji-gallery">
-                    <button>L</button>
-                    <Span>emoji's</Span>
-                    <button>R</button>
-                </div> -->
                 <div class="actions">
                     <button class="btn-save"><a href="#" onclick="onDownload(this)"
                             download="file-name">Download</a></button>

@@ -1,66 +1,11 @@
-.main-layout {
-    display: grid;
-    grid-template-columns: 20px 1fr 20px;
-}
-
-.main-layout > .full {
-    grid-column: 1 / -1;
-}
-
-.main-layout > *:not(.full) {
-    grid-column: 2;
-}
-
-.meme-container {
-    display: grid;
-    grid-template-columns: 1fr 0.5em 1fr;
-    margin-top: 1.5em;
-}
-
-.gallery-container {
-    grid-column: 1 / -1;
-}
 
 .imgs-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 20vw); 
-    grid-auto-rows: 20vw;
+    grid-template-columns: minmax(135px, 49vw)minmax(135px, 49vw);  
     gap: 0.25em;
     padding: 0.25em;
 }
 .imgs-container img {
     max-width: 100%;
   height: auto;
-}
-
-/* .tool-palette > *{
-    margin: 1em;
-} */
-
-
-/* must be toggled to be seen! */
-.modal-about {
-    /* display: none; */
-    position: fixed;
-    font-family: montserrat, Haettenschweiler, serif;
-    font-size: 16px;
-    line-height: 1.5em;
-    width: 23em;
-    height: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--clrmd);
-    text-align: center;
-    border-radius: 1em;
-}
-
-.modal-about h2 {
-   text-decoration: underline;
-   margin-top: 2em;
-   margin-bottom: 0.5em;
-}
-
-.modal-about p {
-   margin: 1em 2em 2em;
 }

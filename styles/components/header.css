@@ -20,12 +20,17 @@ header {
 header h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-block: 0;
-    margin-left: 0.8em;
-    font-size: 3em;
+    margin-left: 0.2em;
+    font-size: 2em;
 }
 
 header .main-nav {
     margin-right: 20px;
+}
+
+body.menu-open .main-screen.menu-background {
+	pointer-events: auto;
+	opacity: 1;
 }
 
 .main-header .main-menu a {
@@ -35,7 +40,7 @@ header .main-nav {
 }
 
 .main-header .main-nav {
-    text-shadow: 0 1px 0 var(--clrprs);
+    text-shadow: 0 1px 0 rgb(49, 48, 48);
     grid-column: 3;
 }
 
@@ -78,11 +83,7 @@ header ul > li a:hover {
 
 .gallery-header {
     display: grid;
-    grid-template-columns: 
-    minmax(auto,450px)
-    30px
-    minmax(auto,450px)
-    ;
+    grid-template-columns: minmax(250px, 1fr);
     color: var(--clr3);
     background-color: bisque;
     padding: 0 20px;
@@ -92,7 +93,7 @@ header ul > li a:hover {
 }
 
 .gallery-header .search-keywords {
-    grid-column: 3;
+   grid-row: 2;
 }
 
 .gallery-header input {

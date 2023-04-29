@@ -2,9 +2,8 @@
     position: fixed;
     width: 100%;
     bottom: 0;
-    height: 6em;
+    height: 4.5em;
     text-align: center;
-    padding: 0.4em 0 4em;
     box-shadow: inset 0 6px 0 var(--clrprs);
     background-color: var(--clrpr);
     color: var(--clr4);
@@ -12,5 +11,5 @@
 
 .main-footer h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    margin-bottom: 0.3em;
+    margin-block: 0.05em;
 }

@@ -1,0 +1,226 @@
+/* MOBILE ONLY */
+
+@media (max-width: 640px) {
+    .main-header {
+		height: 70px;
+    }
+    .main-header ul {
+		max-height: 0;
+		position: fixed;
+        font-size: 1.5em;
+		top: 70px;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+        z-index: 1;
+
+		background-color: #0a6bd9;
+
+		transition: max-height 1s;
+	}
+
+	.menu-open ul {
+		max-height: 100vh;
+	}
+
+	.main-header ul > li {
+		border-inline-end: none;
+		border-bottom: 2px solid var(--clr3);
+	}
+
+	.main-header ul > li a {
+		width: 100%;
+	}
+
+    .main-nav li a.active{
+        color: var(--clr3);
+        font-size: 1.5em;
+    }
+}
+
+/* desktop */
+
+@media (min-width: 640px) {
+	.main-header .menu-button {
+		display: none;
+	}
+
+    .main-layout {
+        display: grid;
+        grid-template-columns: 20px 1fr 20px;
+    }
+    
+    .main-layout > .full {
+        grid-column: 1 / -1;
+    }
+    
+    .main-layout > *:not(.full) {
+        grid-column: 2;
+    }
+
+    .gallery-container {
+        grid-column: 1 / -1;
+    }
+
+    .meme-container {
+        display: grid;
+        grid-template-columns: 1fr 0.5em 1fr;
+        margin-top: 1.5em;
+    }
+
+    .imgs-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 20vw); 
+        grid-auto-rows: 20vw;
+        gap: 0.25em;
+        padding: 0.25em;
+    }
+
+    header h1 {
+        margin-left: 0.8em;
+        font-size: 3em;
+    }
+
+    .gallery-header {
+        display: grid;
+        grid-template-columns: 
+        minmax(auto,450px)
+        30px
+        minmax(auto,450px);
+        color: var(--clr3);
+        background-color: bisque;
+        padding: 0 20px;
+        height: 3em;
+        align-items: center;
+        position: relative;
+    }
+    
+    .gallery-header .search-keywords {
+        grid-row: 1;
+        grid-column: 3;
+    }
+
+    .flex.direction-row {
+        flex-direction: row;
+    }
+
+    .tool-palette {
+        grid-area: 1 / 3;
+        border: solid 3px black;
+        border-radius: 1em;
+        width: 100%;
+    }
+
+    .canvas-container {
+        width: 97%;
+        position: relative;
+    }
+    .canvas {
+        display: block;
+        margin: auto;
+        background-color: var(--clr0);
+        border: 4px solid black;
+        border-radius: 1em;
+    }
+
+    .tool-palette {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-area: 1 / 3;
+        border: solid 3px black;
+        border-radius: 1em;
+        width: 100%;
+    }
+
+    button {
+        border-radius: 0.5em;
+        height: 3em;
+        justify-content: center;
+        padding: 4px 6px;
+        margin: 0px;
+        margin-block: 0.5em;
+    }
+
+    .text-edit-tools {
+        flex: 1;
+        margin-block: 0.5em;
+    }
+
+    .text-input {
+        height: 3em;
+        display: block;
+        margin-inline: auto;
+        border-radius: 0.5em;
+    }
+
+    .textbox-tools img {
+        width: 2em;
+        height: 2em;
+        position: relative;
+    }
+    
+    .text-edit-tools img {
+        width: 2em;
+        height: 2em;
+        position: relative;
+    }
+
+    .color-select {
+        display: block;
+        align-items: center;
+        margin-inline: auto;
+    }
+
+    .select-fonts {
+        height: 3em;
+        display: block;
+        border-radius: 0.5em;
+        margin-inline: auto;
+        border-radius: 0.5em;
+        border: 2px solid black;
+    }
+
+    .main-footer {
+        height: 6em;
+        padding: 0.4em 0 4em;
+    }
+    
+    .main-footer h1 {
+        margin-bottom: 0.3em;
+    }
+
+    
+
+
+
+    /* :root {
+		--grid-size: var(--s);
+	}
+
+	header {
+		position: static;
+	}
+
+	header .logo {
+		margin: 0;
+	}
+
+	header nav {
+		max-width: var(--grid-size); /* grid size: 468 + 40 + 470*/
+	/* }
+
+	header ul {
+		display: flex;
+		width: auto;
+		position: static;
+		height: inherit;
+		transform: translateX(0);
+		transition: none;
+	} */
+
+	
+}
