@@ -1,19 +1,14 @@
 'use strict'
 
-let gElCanvas
-let gCtx
+var gElCanvas
+var gCtx
 let gStartPos
 let gIsMouseDown = false
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
        
-// Handle the listeners
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    // Listen for resize ev
-    // window.addEventListener('resize', () => {
-    //   onInit()
-    // })
 }
 
 function addMouseListeners() {
@@ -81,6 +76,9 @@ function clearCanvas() {
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
+    if (gElCanvas.width = elContainer.offsetWidth) {
+        gElCanvas.width = elContainer.offsetWidth
+        gElCanvas.height = gElCanvas.width
+        gMeme.lines[gMeme.selectedLineIdx].posX = gElCanvas.width / 2
+    }
   }

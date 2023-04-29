@@ -1,3 +1,61 @@
 button {
     cursor: pointer;
+    border-radius: 0.5em;
+    height: 3em;
+    justify-content: center;
+    padding: 0px 6px;
+    margin: 0px;
+}
+
+.textbox-tools {
+    margin-top: 1em;
+    
+}
+
+.textbox-tools img {
+    width: 2em;
+    height: 2em;
+    position: relative;
+}
+
+.text-edit-tools {
+    flex: 1;
+    margin-block: 1em;
+}
+
+.text-edit-tools img {
+    width: 2em;
+    height: 2em;
+    position: relative;
+}
+
+.color-select {
+    display: block;
+    align-items: center;
+    margin-inline: auto;
+    background-color: violet;
+}
+
+.color-select input {
+    background-color: transparent;
+  border: none;
+  outline: none;
+  margin-bottom: 0;
+}
+
+.select-fonts {
+    height: 3em;
+    display: block;
+    border-radius: 0.5em;
+    margin-inline: auto;
+    border-radius: 0.5em;
+    border: 2px solid black;
+}
+
+.text-input {
+    height: 3em;
+    display: block;
+    margin-inline: auto;
+    border-radius: 0.5em;
+ 
 }

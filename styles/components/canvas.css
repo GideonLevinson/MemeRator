@@ -1,3 +1,7 @@
+.canvas-container {
+    width: 97%;
+    position: relative;
+}
 .canvas {
     display: block;
     margin: auto;

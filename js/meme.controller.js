@@ -4,8 +4,11 @@ function init() {
     gElCanvas = document.querySelector('.canvas')
     gCtx = gElCanvas.getContext('2d')
     addListeners()
+    window.addEventListener('resize', resizeCanvas)
+    resizeCanvas()
     renderMeme()
     renderImgs()
+    updateLineInputTxt()
 }
 
 function onTxtInput(txt) {
@@ -14,13 +17,27 @@ function onTxtInput(txt) {
 }
 
 function renderMeme() {
+    resizeCanvas()
     let meme = getMeme()
     let image = getImgURL(meme)
     let img = new Image()
     img.src = image
     if (!image) return
     img.onload = function () {
-        // resizeCanvas
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+        drawText()
+        markSelectedLine()
+        gCtx.save()
+    }
+}
+
+function renderMemeForSave() {
+    let meme = getMeme()
+    let image = getImgURL(meme)
+    let img = new Image()
+    img.src = image
+    if (!image) return
+    img.onload = function () {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
         gCtx.save()
@@ -55,12 +72,6 @@ function onLineSwitch() {
     moveSelectedLine()
     updateLineInputTxt()
     renderMeme()
-}
-
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
 }
 
 function onNavClick(sectionId) {
@@ -106,5 +117,6 @@ function onChangeFont(ev) {
 }
 
 function onDownload(elLink) {
+    renderMemeForSave()
     downloadCanvas(elLink)
 }

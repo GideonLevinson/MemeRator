@@ -11,7 +11,7 @@
 
 <body class="main-layout" onload="init()">
     <header class="main-header full flex space-between align-center">
-        <h1>memerator</h1>
+        <h1>memeRator</h1>
         <div class="main-nav">
             <ul class="main-menu flex align center clean-list">
                 <li><a href="#" class="memes" onclick="onNavClick('memes')">memes</a></li>
@@ -23,31 +23,35 @@
 
     <section id="memes" class="meme-view" hidden>
         <div class="meme-container">
-            <canvas class="canvas" height="500" width="500"></canvas>
+            <div class="canvas-container">
+                <canvas class="canvas"></canvas>
+            </div>
             <div class="tool-palette flex direction-column align-center">
                 <!-- <h2>Tool palette</h2> -->
                 <div class="textbox-tools">
                     <input type="text" class="text-input" onkeyup="onTxtInput(this.value)">
                     <!-- <button>up</button>
                     <button>down</button> -->
-                    <button onclick="onLineSwitch()">switch</button>
-                    <button onclick="onAddLine()">add</button>
-                    <button onclick="onDelLine()">delete</button>
+                    <button onclick="onLineSwitch()"><img src="icons/arrows-up-down-solid.svg" alt=""></button>
+                    <button onclick="onAddLine()"><img src="icons/plus-solid.svg" alt=""></button>
+                    <button onclick="onDelLine()"><img src="icons/trash-can-regular.svg" alt=""></button>
                 </div>
 
                 <div class="text-edit-tools">
-                    <button class="larger-txt" onclick="onTxtFormat(`A+`)">A+</button>
-                    <button onclick="onTxtFormat(`A-`)">A-</button>
-                    <button onclick="onTxtFormat(`left`)">L</button>
-                    <button onclick="onTxtFormat(`center`)">C</button>
-                    <button onclick="onTxtFormat(`right`)">R</button>
                     <select name="fonts" class="select-fonts" onchange="onChangeFont(this.value)">
                         <option value="impact">Impact</option>
                         <option value="lobster">Lobster</option>
                         <option value="Montserrat">Montserrat</option>
                     </select>
-                    <!-- <input onchange="onStrokeClr()" type="color"> -->
-                    <input onchange="onFillClr(this.value)" type="color" value="#FFFFFF">
+                    <button class="larger-txt" onclick="onTxtFormat(`A+`)"><img src="icons/increase font - icon.png" alt=""></button>
+                    <button onclick="onTxtFormat(`A-`)"><img src="icons/decrease font - icon.png" alt=""></button>
+                    <button onclick="onTxtFormat(`left`)"><img src="icons/align-left-solid.svg" alt=""></button>
+                    <button onclick="onTxtFormat(`center`)"><img src="icons/align-center-solid.svg" alt=""></button>
+                    <button onclick="onTxtFormat(`right`)"><img src="icons/align-right-solid.svg" alt=""></button>
+                    <button class="color-select">
+                        <input onchange="onFillClr(this.value)" type="color" value="#FFFFFF">
+                        <img src="icons/palette-solid.svg" alt="">
+                    </button>
                 </div>   
 
                 <!-- <div class="emoji-gallery">
@@ -58,7 +62,7 @@
                 <div class="actions">
                     <button class="btn-save"><a href="#" onclick="onDownload(this)"
                             download="file-name">Download</a></button>
-                    <button>Share</button>
+                    <button onclick="onUploadImg()">Share on Facebook</button>
                 </div>
             </div>
         </div>
@@ -98,15 +102,16 @@
         </div>
     </section>
     <footer class="main-footer full">
-        <h1>memerator</h1>
+        <h1>memeRator</h1>
         <h4>all rights reserved 2023</h4>
     </footer>
 
+    <script src="js/canvas.controller.js"></script>
+    <script src="js/services/sharing-on-facebook.js"></script>
     <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/gallery.controller.js"></script>
     <script src="js/meme.controller.js"></script>
-    <script src="js/canvas.controller.js"></script>
 </body>
 
 </html>

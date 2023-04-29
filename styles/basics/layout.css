@@ -13,7 +13,7 @@
 
 .meme-container {
     display: grid;
-    grid-template-columns: 1fr 2em 1fr;
+    grid-template-columns: 1fr 0.5em 1fr;
     margin-top: 1.5em;
 }
 
@@ -33,9 +33,9 @@
   height: auto;
 }
 
-.tool-palette > *{
-    margin: 2em;
-}
+/* .tool-palette > *{
+    margin: 1em;
+} */
 
 
 /* must be toggled to be seen! */

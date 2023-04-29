@@ -1,5 +1,4 @@
 'use strict'
-var gFillterBy = null
 
 var gImgs = [
     {id: 1, url: 'images/1.jpg', keywords: ['funny', 'cat']},
@@ -22,12 +21,14 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I wish I was that cat right now...',
+            txt: 'memeRator1',
             size: 28,
             align: 'center',
             fill: 'white',
             stroke: 'black',
-            font: 'Impact'
+            font: 'Impact',
+            posX: 250,
+            posY: 30,
         }
     ]
 }
@@ -45,9 +46,7 @@ function getImgURL(meme) {
 
 function setLineTxt(txt) {
     const currTxt = getLine()
-    console.log('currTxt:', currTxt)
     currTxt.txt = txt
-    console.log('currTxt:', currTxt)
 }
 
 function addLine() {
@@ -111,7 +110,6 @@ function getLine() {
 
 function updateLineInputTxt() {
     const currLine = gMeme.lines[gMeme.selectedLineIdx]
-
     if (!currLine) return
     const elInput = document.querySelector('.text-input')
     elInput.value = `${currLine.txt}`
@@ -127,8 +125,6 @@ function drawText() {
         gCtx.textAlign = `${line.align}`
         gCtx.textBaseline = 'middle'
         wrapText(gCtx, line.txt,line.posX, line.posY)
-        // gCtx.strokeText(line.txt, line.posX, line.posY)
-        // gCtx.fillText(line.txt, line.posX, line.posY)
     })
 }
 
@@ -136,6 +132,20 @@ function getAllLines() {
     return gMeme.lines
 }
 
+function markSelectedLine() {
+    const currLine = getLine()
+    if (!currLine) return
+    gCtx.beginPath()
+    gCtx.lineWidth = '3'
+    gCtx.strokeStyle = 'orange'
+    gCtx.strokeRect(
+        currLine.posX - gCtx.measureText(currLine.txt).width / 2 - 14,
+        currLine.posY - currLine.size * 0.6,
+        gCtx.measureText(currLine.txt).width + 20,
+        currLine.size * 1.2
+    )
+    gCtx.stroke()
+}
 
 function _updateLineIdx(idx) {
     gCurrLineIdx = idx
@@ -152,9 +162,9 @@ function _createNewLine(numNewLine) {
     }
     return {
         font: 'impact',
-        txt: 'm',
+        txt: 'memeRator',
         size: 28,
-        align: 'left',
+        align: 'center',
         fill: 'white',
         posX: newPos.x,
         posY: newPos.y,
@@ -180,7 +190,6 @@ function wrapText(gCtx, text, x = 250, y = 30, maxWidth = gElCanvas.width - 60, 
     var words = text.split(" ")
     var line = ""
     var textX = x
-    console.log('textX:', textX)
     if (gCtx.textAlign === "right") {
         console.log('gCtx.measureText(text):', gCtx.measureText(text))
       var metrics = gCtx.measureText(text)
