@@ -14,6 +14,6 @@ function renderImgs() {
 
 function onSelectImg(idx) {
     setImg(idx)
-    switchViews('memes')
+    switchViews('editor')
     renderMeme()
 }

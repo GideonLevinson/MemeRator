@@ -1,27 +1,40 @@
 'use strict'
 
 var gImgs = [
-    {id: 1, url: 'images/1.jpg', keywords: ['funny', 'cat']},
-    {id: 2, url: 'images/2.jpg', keywords: ['funny', 'dog']},
-    {id: 3, url: 'images/3.jpg', keywords: ['baby', 'dog']},
-    {id: 4, url: 'images/4.jpg', keywords: ['mad', 'angry']},
-    {id: 5, url: 'images/5.jpg', keywords: ['funny', 'baby']},
-] 
+    { id: 1, url: 'images/1.jpg', keywords: ['funny', 'cat'] },
+    { id: 2, url: 'images/2.jpg', keywords: ['funny', 'dog'] },
+    { id: 3, url: 'images/3.jpg', keywords: ['baby', 'dog'] },
+    { id: 4, url: 'images/4.jpg', keywords: ['mad', 'angry'] },
+    { id: 5, url: 'images/5.jpg', keywords: ['funny', 'baby'] },
+    { id: 6, url: 'images/6.jpg', keywords: ['funny', 'baby'] },
+    { id: 7, url: 'images/7.jpg', keywords: ['funny', 'baby'] },
+    { id: 8, url: 'images/8.jpg', keywords: ['funny', 'baby'] },
+    { id: 9, url: 'images/9.jpg', keywords: ['funny', 'baby'] },
+    { id: 10, url: 'images/10.jpg', keywords: ['funny', 'baby'] },
+    { id: 11, url: 'images/11.jpg', keywords: ['funny', 'baby'] },
+    { id: 12, url: 'images/12.jpg', keywords: ['funny', 'baby'] },
+    { id: 13, url: 'images/13.jpg', keywords: ['funny', 'baby'] },
+    { id: 14, url: 'images/14.jpg', keywords: ['funny', 'baby'] },
+    { id: 15, url: 'images/15.jpg', keywords: ['funny', 'baby'] },
+    { id: 16, url: 'images/16.jpg', keywords: ['funny', 'baby'] },
+    { id: 17, url: 'images/17.jpg', keywords: ['funny', 'baby'] },
+    { id: 18, url: 'images/18.jpg', keywords: ['funny', 'baby'] },
+]
 
-var gKeywordSearchCountMap = {
-    'funny': 12,
-    'cat': 16,
-    'baby': 2,
-    'drinks':5,
-    'dog': 7,
-}
+// var gKeywordSearchCountMap = {
+//     'funny': 12,
+//     'cat': 16,
+//     'baby': 2,
+//     'drinks': 5,
+//     'dog': 7,
+// }
 
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'memeRator1',
+            txt: '',
             size: 28,
             align: 'center',
             fill: 'white',
@@ -32,7 +45,6 @@ var gMeme = {
         }
     ]
 }
-
 
 function getMeme() {
     return gMeme
@@ -75,33 +87,29 @@ function moveSelectedLine() {
 }
 
 function enlargeTxt() {
-    const currTxt =  getLine()
+    const currTxt = getLine()
     if (currTxt.size <= 48) {
         currTxt.size += 2
-        renderMeme()
     }
     else return
 }
 
 function shrinkTxt() {
-    const currTxt =  getLine()
+    const currTxt = getLine()
     if (currTxt.size >= 16) {
         currTxt.size -= 2
-        renderMeme()
     }
     else return
 }
 
 function SetAlignTxt(aligntxt) {
-    const currTxt =  getLine()
-   currTxt.align = aligntxt
-   renderMeme()
+    const currTxt = getLine()
+    currTxt.align = aligntxt
 }
 
 function setFont(font) {
-    const currTxt =  getLine()
+    const currTxt = getLine()
     currTxt.font = font
-    console.log('currTxt:', currTxt)
 }
 
 function getLine() {
@@ -119,12 +127,15 @@ function drawText() {
     const lines = getAllLines()
     if (!lines) return
     lines.forEach((line) => {
+        gCtx.font = `${line.size}px ${line.font}`
         gCtx.fillStyle = line.fill
         gCtx.strokeStyle = line.stroke
-        gCtx.font = `${line.size}px ${line.font}`
         gCtx.textAlign = `${line.align}`
         gCtx.textBaseline = 'middle'
-        wrapText(gCtx, line.txt,line.posX, line.posY)
+        // const txt = (line.txt) ? line.txt : ''
+        gCtx.fillText(line.txt, line.posX, line.posY)
+        gCtx.strokeText(line.txt, line.posX, line.posY)
+        // wrapText(gCtx, line.txt, line.posX, line.posY)
     })
 }
 
@@ -139,9 +150,9 @@ function markSelectedLine() {
     gCtx.lineWidth = '3'
     gCtx.strokeStyle = 'orange'
     gCtx.strokeRect(
-        currLine.posX - gCtx.measureText(currLine.txt).width / 2 - 14,
+        currLine.posX - gCtx.measureText(currLine.txt).width / 2,
         currLine.posY - currLine.size * 0.6,
-        gCtx.measureText(currLine.txt).width + 20,
+        gCtx.measureText(currLine.txt).width,
         currLine.size * 1.2
     )
     gCtx.stroke()
@@ -158,11 +169,10 @@ function _createNewLine(numNewLine) {
 
     else if (numNewLine === 2) {
         newPos.y = gElCanvas.height - 70
-        console.log('newPos:', newPos)
     }
     return {
         font: 'impact',
-        txt: 'memeRator',
+        txt: '',
         size: 28,
         align: 'center',
         fill: 'white',
@@ -183,41 +193,41 @@ function findImgByIdx(id) {
 }
 
 function setImg(imgIdx) {
-  gMeme.selectedImgId = +imgIdx
+    gMeme.selectedImgId = +imgIdx
 }
 
-function wrapText(gCtx, text, x = 250, y = 30, maxWidth = gElCanvas.width - 60, lineHeight = 42) {
-    var words = text.split(" ")
-    var line = ""
-    var textX = x
-    if (gCtx.textAlign === "right") {
-        console.log('gCtx.measureText(text):', gCtx.measureText(text))
-      var metrics = gCtx.measureText(text)
-      textX = x + (maxWidth) / 2  
-    }
-    else if (gCtx.textAlign === "left") {
-      var metrics = gCtx.measureText(text)
-      textX = x - (maxWidth) / 2
-    }
-    for (var i = 0; i < words.length; i++) {
-      var testLine = line + words[i] + " "
-      var metrics = gCtx.measureText(testLine)
-      var testWidth = metrics.width
-      if (testWidth > maxWidth && i > 0) {
-        gCtx.fillText(line, textX, y)
-        gCtx.strokeText(line, textX, y)
-        line = words[i] + " "
-        y += lineHeight
-      }
-      else {
-        line = testLine
-      }
-    }
-    gCtx.fillText(line, textX, y)
-    gCtx.strokeText(line, textX, y)
-  }
+// function wrapText(gCtx, text, x = 250, y = 30, maxWidth = gElCanvas.width - 60, lineHeight = 42) {
+//     var words = text.split(" ")
+//     var line = ""
+//     var textX = x
+//     if (gCtx.textAlign === "right") {
+//         console.log('gCtx.measureText(text):', gCtx.measureText(text))
+//       var metrics = gCtx.measureText(text)
+//       textX = x + (maxWidth) / 2  
+//     }
+//     else if (gCtx.textAlign === "left") {
+//       var metrics = gCtx.measureText(text)
+//       textX = x - (maxWidth) / 2
+//     }
+//     for (var i = 0; i < words.length; i++) {
+//       var testLine = line + words[i] + " "
+//       var metrics = gCtx.measureText(testLine)
+//       var testWidth = metrics.width
+//       if (testWidth > maxWidth && i > 0) {
+//         gCtx.fillText(line, textX, y)
+//         gCtx.strokeText(line, textX, y)
+//         line = words[i] + " "
+//         y += lineHeight
+//       }
+//       else {
+//         line = testLine
+//       }
+//     }
+//     gCtx.fillText(line, textX, y)
+//     gCtx.strokeText(line, textX, y)
+//   }
 
-  function downloadCanvas(elLink) {
+function downloadCanvas(elLink) {
     console.log('Hi')
     // Gets the canvas content and convert it to base64 data URL that can be save as an image
     const data = gElCanvas.toDataURL() // Method returns a data URL containing a representation of the image in the format specified by the type parameter.

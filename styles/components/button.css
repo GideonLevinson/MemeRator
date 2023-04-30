@@ -1,19 +1,26 @@
-button {
+button :not(.main-nav) {
     cursor: pointer;
     border-radius: 0.5em;
     height: 10vw;
     justify-content: center;
     padding: 2px 4px;
     margin: 0px;
-    margin-block: 0.5em;
+}
+
+button.menu-button {
+    background: transparent;
+    border: none;
+    font-size: 3em;
+    color: var(--clr0);
 }
 
 .textbox-tools {
-    margin-top: 0.5em;  
+    margin-top: 0.5em;
 }
 
-.textbox-tools > * {
-    margin: 0.5em;  
+.textbox-tools>* {
+    margin: 0.5em;
+    position: relative;
 }
 
 .textbox-tools img {
@@ -29,14 +36,15 @@ button {
 }
 
 .color-select {
-    background-color: violet;
+    display: inline-block;
+    width: 3em;
+    border-radius: 0.5em;
 }
 
 .color-select input {
-    background-color: transparent;
-  border: none;
-  outline: none;
-  margin-bottom: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    display: block;
 }
 
 .select-fonts {
@@ -49,21 +57,22 @@ button {
 }
 
 .text-input {
-    height: 2em;
+    height: 3.8em;
     margin-inline: auto;
     border-radius: 0.5em;
+    vertical-align: bottom;
 }
 
 .switch {
-    background-color:darkorange;
+    background-color: darkorange;
 }
 
 .add {
-    background-color:chartreuse;
+    background-color: chartreuse;
 }
 
 .delete {
-    background-color:crimson;
+    background-color: crimson;
 }
 
 .text-edit-btn {
@@ -73,4 +82,3 @@ button {
 .actions {
     margin-bottom: 0.5em;
 }
-

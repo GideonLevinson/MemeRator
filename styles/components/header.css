@@ -7,6 +7,7 @@ header {
 }
 
 .main-header {
+    grid-row: 1;
     display: grid;
     grid-template-columns: 
     minmax(auto,450px)
@@ -33,6 +34,10 @@ body.menu-open .main-screen.menu-background {
 	opacity: 1;
 }
 
+.main-header a {
+    color: inherit;
+    text-decoration: none;
+}
 .main-header .main-menu a {
     color: inherit;
     text-decoration: none;

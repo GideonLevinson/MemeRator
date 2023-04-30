@@ -10,59 +10,24 @@
 </head>
 
 <body class="main-layout" onload="init()">
+    <div class="main-screen menu-background" onclick="onToggleMenu()"></div>
     <header class="main-header full flex space-between align-center">
-        <h1>memeRator</h1>
+        <a href="" onclick="onNavClick('gallery')">
+            <h1>memeRator</h1>
+        </a>
         <div class="main-nav">
             <ul class="main-menu flex align center clean-list">
-                <li><a href="#" class="memes" onclick="onNavClick('memes')">memes</a></li>
                 <li><a href="#" class="gallery active" onclick="onNavClick('gallery')">gallery</a></li>
+                <li><a href="#" class="memes" onclick="onNavClick('memes')">memes</a></li>
                 <li><a href="#" class="about" onclick="onNavClick('about')">about</a></li>
             </ul>
             <button class="menu-button" onclick="onToggleMenu()">☰</button>
         </div>
     </header>
 
-    <section id="memes" class="meme-view" hidden>
-        <div class="meme-container">
-            <div class="canvas-container">
-                <canvas class="canvas"></canvas>
-            </div>
-            <div class="tool-palette">
-                <div class="textbox-tools">
-                    <input type="text" class="text-input" onkeyup="onTxtInput(this.value)">
-                    <button class="switch" onclick="onLineSwitch()"><img src="icons/arrows-up-down-solid.svg" alt=""></button>
-                    <button class="add" onclick="onAddLine()"><img src="icons/plus-solid.svg" alt=""></button>
-                    <button class="delete" onclick="onDelLine()"><img src="icons/trash-can-regular.svg" alt=""></button>
-                </div>
-
-                <div class="text-edit-tools">
-                    <select name="fonts" class="select-fonts" onchange="onChangeFont(this.value)">
-                        <option value="impact">Impact</option>
-                        <option value="lobster">Lobster</option>
-                        <option value="Montserrat">Montserrat</option>
-                    </select>
-                    <button class="text-edit-btn" onclick="onTxtFormat(`A+`)"><img src="icons/increase font - icon.png" alt=""></button>
-                    <button class="text-edit-btn" onclick="onTxtFormat(`A-`)"><img src="icons/decrease font - icon.png" alt=""></button>
-                    <button class="text-edit-btn" onclick="onTxtFormat(`left`)"><img src="icons/align-left-solid.svg" alt=""></button>
-                    <button class="text-edit-btn" onclick="onTxtFormat(`center`)"><img src="icons/align-center-solid.svg" alt=""></button>
-                    <button class="text-edit-btn" onclick="onTxtFormat(`right`)"><img src="icons/align-right-solid.svg" alt=""></button>
-                    <button class="color-select">
-                        <input onchange="onFillClr(this.value)" type="color" value="#FFFFFF">
-                        <img src="icons/palette-solid.svg" alt="">
-                    </button>
-                </div>   
-                <div class="actions">
-                    <button class="btn-save"><a href="#" onclick="onDownload(this)"
-                            download="file-name">Download</a></button>
-                    <button onclick="onUploadImg()">Share on Facebook</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery-view full">
+    <section id="gallery" class="gallery-view">
         <div id="gallery" class="gallery-container">
-            <header class="gallery-header">
+            <!-- <header class="gallery-header">
                 <input type="search" name="search" placeholder="Enter search keyword">
                 <div class="search-keywords">
                     <ul class="clean-list flex space-between align-center">
@@ -73,8 +38,61 @@
                         <li>cat</li>
                     </ul>
                 </div>
-            </header>
+            </header> -->
             <div class="imgs-container">
+            </div>
+        </div>
+    </section>
+
+    <section id="editor" class="meme-editor" hidden>
+        <div class="meme-container">
+            <div class="canvas-container">
+                <canvas class="canvas"></canvas>
+            </div>
+            <div class="tool-palette">
+                <div class="textbox-tools">
+                    <input type="text" class="text-input" onkeyup="onTxtInput(this.value)" placeholder="add text">
+                    <button class="switch" onclick="onLineSwitch()"><img src="icons/arrows-up-down-solid.svg"
+                            alt=""></button>
+                    <button class="add" onclick="onAddLine()"><img src="icons/plus-solid.svg" alt=""></button>
+                    <button class="delete" onclick="onDelLine()"><img src="icons/trash-can-regular.svg" alt=""></button>
+                </div>
+
+                <div class="text-edit-tools">
+                    <select name="fonts" class="select-fonts" onchange="onChangeFont(this.value)">
+                        <option value="impact">Impact</option>
+                        <option value="lobster">Lobster</option>
+                        <option value="Montserrat">Montserrat</option>
+                    </select>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`A+`)"><img src="icons/increase font - icon.png"
+                            alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`A-`)"><img src="icons/decrease font - icon.png"
+                            alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`right`)"><img src="icons/align-left-solid.svg"
+                            alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`center`)"><img
+                            src="icons/align-center-solid.svg" alt=""></button>
+                    <button class="text-edit-btn" onclick="onTxtFormat(`left`)"><img src="icons/align-right-solid.svg"
+                            alt="">
+                    </button>
+                    <div class="color-select">
+                        <label for="color"><img src="icons/palette-solid.svg" alt=""></label>
+                        <input id="color" oninput="onFillClr(this.value)" type="color" value="#FFFFFF">
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="btn-save"><a href="#" onclick="onDownload(this)"
+                            download="file-name">Download</a></button>
+                    <button onclick="onUploadImg()">Share on Facebook</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="memes" class="saved-memes" hidden>
+        <div class="memes-gallery">
+            <div>
+                <h3>no saved memes...</h3>
             </div>
         </div>
     </section>
@@ -93,9 +111,10 @@
             <img src="images/my-meme.png" alt="">
         </div>
     </section>
-    <footer class="main-footer full">
+
+    <footer class="app-footer full">
         <h1>memeRator</h1>
-        <h4>all rights reserved 2023</h4>
+        <h4>coffeerights 2023 - created by Gideon Levinson</h4>
     </footer>
 
     <script src="js/canvas.controller.js"></script>

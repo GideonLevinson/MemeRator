@@ -4,7 +4,7 @@ function init() {
     gElCanvas = document.querySelector('.canvas')
     gCtx = gElCanvas.getContext('2d')
     addListeners()
-    window.addEventListener('resize', resizeCanvas)
+    // window.addEventListener('resize', resizeCanvas)
     resizeCanvas()
     renderMeme()
     renderImgs()
@@ -44,7 +44,6 @@ function renderMemeForSave() {
     }
 }
 
-
 function onChangeLineTxt(txt) {
     setLineTxt(txt)
     renderMeme()
@@ -79,7 +78,6 @@ function onNavClick(sectionId) {
 }
 
 function onTxtFormat(ev) {
-    console.log('ev:', ev)
     switch (ev) {
         case 'A+':
             enlargeTxt()
@@ -108,6 +106,7 @@ function onTxtFormat(ev) {
 
             break
     }
+    renderMeme()
 }
 
 function onChangeFont(ev) {

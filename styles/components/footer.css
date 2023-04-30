@@ -1,7 +1,5 @@
-.main-footer {
-    position: fixed;
+.app-footer {
     width: 100%;
-    bottom: 0;
     height: 4.5em;
     text-align: center;
     box-shadow: inset 0 6px 0 var(--clrprs);
@@ -9,7 +7,7 @@
     color: var(--clr4);
 }
 
-.main-footer h1 {
+.app-footer h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-block: 0.05em;
 }

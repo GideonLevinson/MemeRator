@@ -5,7 +5,25 @@
     gap: 0.25em;
     padding: 0.25em;
 }
+
 .imgs-container img {
     max-width: 100%;
   height: auto;
+  transition: scale 0.3s;
+}
+
+.imgs-container img:hover {
+  scale: 1.03;
+  cursor: pointer;
+}
+
+.flex.direction-row {
+  flex-direction: row;
+}
+
+.tool-palette {
+  grid-area: 1 / 3;
+  border: solid 3px black;
+  border-radius: 1em;
+  width: 100%;
 }
